@@ -1,0 +1,38 @@
+# Node modules
+node_modules/
+
+# Build artifacts
+build/
+dist/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup directories
+assets-backup-*/
+*-backup/
+
+# Compression scripts (keep in local only)
+compress*.sh
+*.sh
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment files
+.env
+.env.local
+
+# Temporary files
+tmp/
+temp/
+*.tmp

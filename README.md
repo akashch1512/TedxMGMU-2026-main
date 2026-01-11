@@ -1,0 +1,1 @@
+I have updated the team section as per your request, The Co-licensee card is now on the third row and there is another card on the same row, I have also moved one card from the 4th line to the 3rd line making a pyramid style hirearchy. 

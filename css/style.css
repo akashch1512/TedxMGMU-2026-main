@@ -1,0 +1,2035 @@
+/*
+ * TEDxMGMU 2026 - EMBER
+ * Main Stylesheet
+ * Version: 1.0
+ * Last Update: December 2025
+ */
+
+/* ===== TABLE OF CONTENTS =====
+ * 1. CSS Variables
+ * 2. Global Reset
+ * 3. Typography
+ * 4. Header & Navigation
+ * 5. Hero Section
+ * 6. Sections
+ * 7. Team Cards
+ * 8. Footer
+ * 9. Animations
+ * 10. Responsive
+ */
+
+/* ===================================
+   1. CSS VARIABLES
+   =================================== */
+:root {
+    --ted-red: #FF3D00;
+    --ted-dark-red: #FF5520;
+    --ember-orange: #FF6300;
+    --ember-gradient-start: #FF3D00;
+    --ember-gradient-mid: #FF5050;
+    --ember-gradient-end: #FF6300;
+    --logo-red: #e62b1e;
+    --dark-bg: #050505;
+    --dark-secondary: #1a0a0a;
+    --light-text: #e0e0e0;
+    --white: #ffffff;
+    --black: #000000;
+}
+
+/* Apply EMBER orange to colored text where used (preserves logo styles) */
+.text-danger {
+    color: var(--ember-orange) !important;
+}
+
+/* Mobile hero buy button: hidden by default, shown only on small screens beside the logo */
+.mobile-hero-buy {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-hero-buy {
+        display: inline-block;
+        margin-left: 0.5rem;
+        padding: 0.15rem 0.7rem;
+        font-size: 0.85rem;
+        border-radius: 2px;
+        background: linear-gradient(90deg, #b82a00, #d94c00);
+        color: #f5f5f5;
+        text-decoration: none;
+        opacity: 0.92;
+        line-height: 1.1;
+    }
+
+    /* ensure any leftover mobile link in the sidebar stays hidden */
+    .nav-menu .mobile-buy-tickets {
+        display: none !important;
+    }
+}
+
+/* ===================================
+   2. GLOBAL RESET
+   =================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    scroll-padding-top: 0px; /* No offset for seamless sections */
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    overflow-x: hidden;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: var(--ted-red);
+}
+
+/* ===================================
+   3. TYPOGRAPHY
+   =================================== */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+
+.section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(0.5rem, 2vw, 2.5rem);
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.section-title .text-danger {
+    background: linear-gradient(135deg, #FF3D00 0%, #FF6300 100%);
+    color: var(--color-ember);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--light-text);
+    margin-bottom: 1.5rem;
+}
+
+/* ===================================
+   4. HEADER & NAVIGATION
+   =================================== */
+.header-wrapper {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 1000;
+    padding: 0 20px;
+    pointer-events: none;
+}
+
+.header-pill {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 980px;
+    height: 74px;
+    padding: 0 30px;
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s ease;
+}
+
+.header-pill.scrolled {
+    background: rgba(5, 5, 5, 0.85);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    z-index: 1002;
+}
+
+.logo-red { color: var(--logo-red); }
+.logo-white { color: var(--white); margin-left: 2px; font-weight: 300; }
+.logo:hover { transform: scale(1.05); }
+
+.nav-menu {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-item {
+    color: var(--light-text);
+    font-size: 1.2rem;
+    font-weight: 300;
+    padding: 5px 10px;
+    border-radius: 20px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-family: 'Cormorant Garamond', serif;
+
+}
+
+.nav-item:hover {
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+.nav-item.active {
+    color: var(--ted-red);
+    font-weight: 300;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 1002;
+}
+
+.btn-buy-tickets {
+    background: linear-gradient(135deg, #FF3D00 0%, #ff0000 100%);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: 'Cormorant Garamond', serif;
+    /* box-shadow: 0 4px 10px rgba(196, 48, 43, 0.3); */
+    /* transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); */
+}
+
+
+.mobile-buy-tickets { display: none; }
+
+.mobile-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+}
+
+.mobile-toggle span {
+    display: block;
+    height: 2px;
+    background-color: white;
+    border-radius: 2px;
+    transition: all 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+.mobile-toggle span:nth-child(1) { width: 32px; }
+.mobile-toggle span:nth-child(2) { width: 24px; }
+.mobile-toggle span:nth-child(3) { width: 16px; }
+
+.mobile-toggle:hover span {
+    width: 32px;
+    background-color: var(--ted-red);
+}
+
+/* ===================================
+   5. HERO SECTION
+   =================================== */
+
+/* Fixed Video Background - Stays across hero and theme sections */
+.fixed-video-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    background: var(--black);
+}
+
+.hero-bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.opening-video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+.opening-video-container.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#openingVideoElement {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.hero-content {
+    position: relative;
+    
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Position the Ember text logo to ensure it's on top of the X logo */
+.hero-title-svg {
+    position: relative;
+    z-index: 10;
+}
+
+/* mobile hero logo hidden by default (desktop unaffected) */
+.mobile-hero-logo {
+    display: none;
+}
+
+/* desktop hero logo hidden by default (mobile unaffected) */
+.desktop-hero-logo {
+    display: none;
+}
+
+.logo-img {
+  height: 36px;      /* desktop size */
+  width: auto;
+}
+
+.logo-img-footer {
+  height: 50px;      /* footer size */
+  width: auto;
+}
+
+@media (max-width: 768px) {
+  .logo-img {
+    height: 40px;    /* bigger on mobile */
+    width: auto;
+  }
+}
+
+
+/* Tablet/Smaller laptop screens (768px - 961px): reduce size to avoid navbar overlap */
+@media (min-width: 768px) and (max-width: 960px) {
+    .hero-content {
+        padding: 1rem;
+        padding-top: 6rem;
+    }
+
+    .desktop-hero-logo {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: -45%;
+        transform: translateY(-50%);
+        width: 140vw;
+        max-width: 600px;
+        height: auto;
+        z-index: 9;
+        pointer-events: none;
+        opacity: 0.95;
+    }
+
+    /* Adjust EMBER text for smaller laptop screens */
+    .hero-title-svg {
+    max-width: 1200px !important;  /* increase from 550 */
+    width: 100% !important;        /* increase from 75% */
+    margin-left: 25% !important;
+    margin-right: auto !important;
+    margin-top: 0 !important;
+}
+
+}
+
+@media (min-width: 961px) {
+    .desktop-hero-logo {
+        display: block;
+        position: absolute;
+        top: 55%;
+        left: -55%;
+        transform: translateY(-50%);
+        width: 200vw;
+        max-width: 1300px;
+        height: auto;
+        z-index: 9;
+        pointer-events: none;
+        opacity: 0.95;
+    }
+
+    /* Adjust EMBER text for laptop screens */
+    .hero-title-svg {
+        top: 5%;
+        left: 0%;
+        max-width: 1000px !important;
+        width: 100% !important;
+        margin-left: 35% !important;
+        margin-right: auto !important;
+        margin-top: 0 !important;
+    }
+}
+
+.hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 16vw, 16rem);
+    font-weight: 50;
+    letter-spacing: 0.1em;
+    margin: 0;
+    background: linear-gradient(135deg, 
+        #FF3D00 0%, 
+        #FF6300 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    z-index: 10;
+}
+
+@keyframes emberGlow {
+    0%, 100% {
+        text-shadow: 
+            0 0 20px rgba(255, 61, 0, 0.3),
+            0 0 40px rgba(255, 99, 0, 0.2),
+            0 0 60px rgba(255, 61, 0, 0.1);
+    }
+    50% {
+        text-shadow: 
+            0 0 30px rgba(255, 61, 0, 0.5),
+            0 0 60px rgba(255, 99, 0, 0.4),
+            0 0 90px rgba(255, 61, 0, 0.3);
+    }
+}
+
+.hero-tagline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.8rem, 2.5vw, 1.3rem);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    animation: fadeInUp 1s ease 0.5s forwards;
+    opacity: 0;
+    white-space: nowrap;
+    width: fit-content;
+    
+}
+
+
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    animation: bounce 2s infinite;
+}
+
+.scroll-indicator i {
+    font-size: 2rem;
+    background: linear-gradient(135deg, #FF3D00 0%, #FF6300 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0.8;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+    40% { transform: translateX(-50%) translateY(-10px); }
+    60% { transform: translateX(-50%) translateY(-5px); }
+}
+
+/* ===================================
+   6. THEME SECTION
+   =================================== */
+.theme-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 6rem 0;
+    z-index: 1;
+}
+
+/* Ensure text stays visible during scrolling */
+.theme-section .theme-description,
+.theme-section .theme-title,
+.theme-section p,
+.theme-section h1,
+.theme-section h2 {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
+.theme-header {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(0.5rem, 2vw, 2.5rem);
+    font-size: 4rem;
+    color: var(--white);
+    letter-spacing: 2px;
+    margin-bottom: 0;
+    text-shadow: 0 0 20px rgba(255, 61, 0, 0.3);
+}
+
+.theme-title-wrapper {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 2rem;
+}
+
+.theme-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--white);
+    font-family: 'Cormorant Garamond', serif;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.theme-title .text-danger {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 1800;
+    font-size: 2.5rem;
+}
+
+.theme-content-box {
+    border-left: 5px solid var(--ember-orange);
+    padding-left: 2rem;
+    margin-top: 2rem;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.theme-description {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    line-height: 1.9;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+    text-align: justify;
+    margin-bottom: 0;
+}
+
+.btn-view-more {
+    background: linear-gradient(135deg, #FF3D00 0%, #FF6300 100%);
+    color: var(--white);
+    border: none;
+    padding: 0.75rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.btn-view-more:hover {
+    background: linear-gradient(135deg, #FF5520 0%, #FF6300 50%, #E63000 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 61, 0, 0.4);
+}
+
+/* ===================================
+   7. GENERAL SECTIONS (After Theme)
+   =================================== */
+section {
+    min-height: auto;
+    position: relative;
+    padding: 5rem 0;
+}
+
+/* Sections after theme with solid background */
+section:not(.hero-section):not(.theme-section) {
+    background: #000000;
+    position: relative;
+    z-index: 2;
+}
+
+/* Old about section styles - keeping for backwards compatibility */
+.about-section {
+    background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-secondary) 100%);
+    position: relative;
+    z-index: 5;
+}
+
+/* Ensure text stays visible during scrolling */
+.about-section .section-text,
+.about-section .section-title,
+.about-section p {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
+/* View More Button Styles */
+.btn-outline-danger {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    border: 2px solid var(--ember-gradient-start);
+    background: linear-gradient(135deg, 
+        var(--ember-gradient-start) 0%, 
+        var(--ember-gradient-mid) 50%, 
+        var(--ember-gradient-end) 100%);
+    color: var(--white);
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-danger:hover {
+    background: linear-gradient(135deg, #FF5520 0%, #FF6300 50%, #E63000 100%);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 61, 0, 0.4);
+}
+
+.btn-outline-danger:focus {
+    box-shadow: 0 0 0 0.25rem rgba(255, 61, 0, 0.3);
+}
+
+/* Smooth collapse transition */
+#moreContent {
+    transition: all 0.4s ease-in-out;
+}
+
+#moreContent.collapsing {
+    transition: height 0.4s ease-in-out;
+}
+
+/* ===================================
+   ABOUT US SECTION
+   =================================== */
+.about-us-section {
+    background: #000000;
+    position: relative;
+    z-index: 5;
+}
+
+.about-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(0.5rem, 2vw, 2.5rem);
+    font-size: 4rem;
+    color: var(--white);
+    
+    letter-spacing: 2px;
+    margin-bottom: 0;
+}
+
+/* Tab Navigation */
+.about-tabs-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50px;
+    padding: 5px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.about-tab {
+    flex: 1;
+    padding: 1rem 2rem;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    
+    
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-tab:hover {
+    color: var(--white);
+}
+
+.about-tab.active {
+    background: linear-gradient(135deg, #FF3D00 0%, #FF6300 100%);
+    color: var(--white);
+    box-shadow: 0 5px 20px rgba(255, 61, 0, 0.4);
+}
+
+/* Tab Content */
+.tab-content-box {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 3rem;
+    min-height: 200px;
+}
+
+.tab-content-box.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.about-content-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    
+    line-height: 1.9;
+    color: rgba(255, 255, 255, 0.85);
+    text-align: justify;
+    margin: 0;
+}
+
+.speakers-section, .sponsors-section {
+    background: var(--dark-bg);
+}
+
+.speaker-card {
+    background: linear-gradient(135deg, rgba(26, 10, 10, 0.92) 0%, rgba(5, 5, 5, 0.97) 65%);
+    border: 1px solid rgba(255, 107, 53, 0.3);
+    border-radius: 28px;
+    padding: clamp(1.25rem, 3vw, 2.25rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+    position: relative;
+    overflow: hidden;
+    max-width: 520px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.speaker-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--ember-gradient-start), transparent 65%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.speaker-photo {
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 4 / 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.speaker-photo--offset-lower img {
+    object-position: center 60%;
+}
+
+/* Dual Speaker Card Styling - Shared Photo */
+.speaker-card--dual {
+    background: linear-gradient(135deg, rgba(26, 10, 10, 0.92) 0%, rgba(5, 5, 5, 0.97) 65%) !important;
+    border: 1px solid rgba(255, 107, 53, 0.3) !important;
+    padding: clamp(1.25rem, 3vw, 2rem) !important;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.dual-shared-photo {
+    width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 107, 53, 0.3) !important;
+    overflow: hidden !important;
+}
+
+.dual-shared-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.dual-names {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    padding: 0.75rem 0;
+    flex-wrap: wrap;
+}
+
+.dual-name-item {
+    flex: 1;
+    text-align: center;
+    min-width: 150px;
+}
+
+.dual-name-item .speaker-name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 0.2rem 0;
+    color: #fff;
+}
+
+.dual-name-item .speaker-role {
+    color: var(--ember-orange);
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.dual-separator {
+    color: var(--ember-orange);
+    font-size: 1.2rem;
+    font-weight: 300;
+    opacity: 0.6;
+    flex-shrink: 0;
+}
+
+/* Mobile Responsiveness for Dual Speaker Card */
+@media (max-width: 768px) {
+    .speaker-card--dual {
+        padding: 1.25rem !important;
+        gap: 1rem;
+    }
+    
+    .dual-shared-photo {
+        height: 240px !important;
+    }
+    
+    .dual-names {
+        flex-direction: column;
+        gap: 0.6rem;
+        padding: 0.5rem 0;
+    }
+    
+    .dual-name-item {
+        min-width: 100%;
+    }
+    
+    .dual-name-item .speaker-name {
+        font-size: 0.95rem;
+    }
+    
+    .dual-name-item .speaker-role {
+        font-size: 0.65rem;
+    }
+    
+    .dual-separator {
+        display: none;
+    }
+}
+
+.speaker-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.speaker-card:hover .speaker-photo img {
+    transform: scale(1.05);
+}
+
+.speaker-content {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--light-text);
+    text-align: center;
+}
+
+/* Expandable Speaker Card Styles */
+.speaker-card {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.35, 0, 0.65, 1);
+}
+
+.speaker-card.expanded {
+    box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+}
+
+.speaker-details-minimal {
+    display: block;
+    transition: opacity 0.3s ease, max-height 0.4s ease;
+    max-height: 1000px;
+    opacity: 1;
+    overflow: hidden;
+}
+
+.speaker-card.expanded .speaker-details-minimal {
+    display: none;
+    opacity: 0;
+    max-height: 0;
+}
+
+.speaker-details-full {
+    transition: opacity 0.3s ease, max-height 0.4s ease;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+}
+
+.speaker-card.expanded .speaker-details-full {
+    display: block !important;
+    opacity: 1;
+    max-height: 2000px;
+}
+
+.speaker-description--brief {
+    font-size: 0.95rem;
+    font-style: regular;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.speaker-expand-btn {
+    background: none;
+    border: none;
+    color: var(--ember-orange);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    margin-left: auto;
+    transition: transform 0.3s ease, color 0.3s ease;
+    opacity: 0.7;
+    font-size: 0;
+}
+
+.speaker-expand-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.speaker-card.expanded .speaker-expand-btn {
+    transform: rotate(180deg);
+}
+
+.speaker-expand-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+}
+
+/* Mobile: Stack expand button differently */
+@media (max-width: 768px) {
+    .speaker-expand-btn {
+        margin-left: auto;
+    }
+}
+
+.speaker-tagline {
+    text-transform: uppercase;
+    letter-spacing: 0.3rem;
+    font-size: 0.7rem;
+    background: linear-gradient(135deg, var(--ember-gradient-start), var(--ember-gradient-mid));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.speaker-name {
+    font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+    margin-bottom: 0.4rem;
+    color: var(--white);
+}
+
+.speaker-role {
+    font-size: 1rem;
+    color: var(--ember-orange);
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    margin-bottom: 1rem;
+}
+
+.speaker-description {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+@media (max-width: 768px) {
+    .speaker-card {
+        padding: 1.25rem;
+        gap: 1rem;
+    }
+
+    .speaker-tagline {
+        letter-spacing: 0.18rem;
+        font-size: 0.65rem;
+    }
+
+    .speaker-name {
+        font-size: clamp(1.65rem, 8vw, 2.2rem);
+    }
+
+    .speaker-description {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .speaker-card {
+        padding: 1rem;
+    }
+
+    .speaker-role {
+        font-size: 0.95rem;
+    }
+}
+
+.team-section {
+    background: linear-gradient(135deg, var(--dark-secondary) 0%, var(--dark-bg) 100%);
+}
+
+.coming-soon {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.coming-soon h3 {
+    
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.coming-soon p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+}
+
+/* Revealing More Soon Card */
+.revealing-soon-card {
+    background: linear-gradient(135deg, rgba(26, 10, 10, 0.92) 0%, rgba(5, 5, 5, 0.97) 65%) !important;
+    border: 1px solid rgba(255, 107, 53, 0.3) !important;
+    padding: 2.5rem 2rem !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1.5rem;
+    cursor: default;
+    transition: all 0.4s ease;
+    min-height: 350px;
+}
+
+.revealing-soon-card:hover {
+    border-color: rgba(255, 107, 53, 0.5) !important;
+    box-shadow: 0 10px 30px rgba(255, 99, 0, 0.15);
+}
+
+.revealing-icon-container {
+    font-size: 3.5rem;
+    color: var(--ember-orange);
+    opacity: 0.8;
+    animation: sway 3s ease-in-out infinite;
+}
+
+.revealing-soon-card .speaker-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.revealing-text {
+    color: rgba(255, 255, 255, 0.75);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    margin: 0;
+    line-height: 1.6;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+}
+
+@keyframes sway {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .revealing-soon-card {
+        min-height: 300px;
+        padding: 2rem 1.5rem !important;
+    }
+    
+    .revealing-icon-container {
+        font-size: 2.5rem;
+    }
+    
+    .revealing-soon-card .speaker-name {
+        font-size: 1.3rem;
+    }
+    
+    .revealing-text {
+        font-size: 1rem;
+    }
+}
+
+/* ===================================
+   7. TEAM CARDS
+   =================================== */
+.team-card-wrapper {
+    transition: all 0.4s ease;
+    margin-bottom: 2rem; /* Add consistent bottom margin */
+}
+
+/* New class for cards that should fit their content */
+.team-card-fit-content {
+    display: block !important; 
+    width: fit-content !important;
+    max-width: 100%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    flex: none !important; 
+    float: none !important;
+}
+
+.team-card-fit-content .team-card {
+    max-width: 380px; 
+    width: 100%; 
+    height: auto;
+}
+
+.team-card-fit-content .team-image-wrapper {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+}
+
+/* Original styles below */
+.team-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    padding: 1.5rem;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    height: 100%;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+    display: flex;
+    flex-direction: column;
+}
+
+.team-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #FF3D00;
+    box-shadow: 0 10px 30px rgba(255, 61, 0, 0.3);
+}
+
+.team-image-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    flex-shrink: 0; /* Prevents image from shrinking */
+    aspect-ratio: 1/1; 
+}
+
+.team-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transition: transform 0.4s ease;
+}
+
+.team-card:hover .team-image {
+    transform: scale(1.1);
+}
+
+.team-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(255, 61, 0, 0.95) 0%, 
+        rgba(255, 99, 0, 0.95) 50%, 
+        rgba(255, 61, 0, 0.95) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.team-card:hover .team-overlay {
+    opacity: 1;
+}
+
+.team-icon {
+    font-size: 3rem;
+    color: white;
+}
+
+.team-content {
+    text-align: center;
+    flex-grow: 1; /* Allows content to fill space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.team-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.team-role {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #FF3D00;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.team-description {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.0rem;
+    color: var(--light-text);
+    margin: 0;
+}
+
+/* Tiered layout styles */
+#teamGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Tier 1 - Largest Cards */
+.team-tier-1 .team-image-wrapper {
+    height: 300px;
+}
+.team-tier-1 .team-name {
+    font-size: 1.6rem;
+}
+.team-tier-1 .team-role {
+    font-size: 1.2rem;
+}
+.team-tier-1 .team-description {
+    font-size: 1.1rem;
+}
+
+/* Tier 2 - Medium Cards */
+.team-tier-2 .team-image-wrapper {
+    height: 260px;
+}
+.team-tier-2 .team-name {
+    font-size: 1.5rem;
+}
+.team-tier-2 .team-role {
+    font-size: 1.15rem;
+}
+.team-tier-2 .team-description {
+    font-size: 1.05rem;
+}
+
+/* Tier 3 - Standard Cards */
+.team-tier-3 .team-image-wrapper {
+    height: 220px;
+}
+/* Default .team-name, .team-role, .team-description are already sized for Tier 3 */
+
+
+/* ===================================
+   8. MEMORIES SECTION
+   =================================== */
+.memories-section {
+    font-family: 'Cormorant Garamond', serif;
+    background: linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
+    overflow: hidden;
+    position: relative;
+}
+
+.memories-row {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 10%,
+        black 90%,
+        transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 10%,
+        black 90%,
+        transparent 100%
+    );
+}
+
+.memories-track {
+    display: flex;
+    gap: 1.5rem;
+    width: fit-content;
+    will-change: transform;
+}
+
+/* Left to Right Animation */
+.memories-row-ltr .memories-track {
+    animation: scrollLeft 40s linear infinite;
+}
+
+/* Right to Left Animation */
+.memories-row-rtl .memories-track {
+    animation: scrollRight 40s linear infinite;
+}
+
+/* Pause on hover */
+.memories-row:hover .memories-track {
+    animation-play-state: paused;
+}
+
+.memory-card {
+    position: relative;
+    width: 350px;
+    height: 250px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    background: #1a1a1a;
+}
+
+.memory-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transition: transform 0.5s ease;
+    padding: 8px;
+    background: linear-gradient(135deg, rgba(50, 50, 50, 0.8), rgba(30, 30, 30, 0.8));
+}
+
+.memory-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(255, 61, 0, 0.5);
+}
+
+.memory-card:hover img {
+    transform: scale(1.1);
+}
+
+.memory-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.7) 50%,
+        transparent 100%
+    );
+    padding: 1.5rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+}
+
+.memory-card:hover .memory-overlay {
+    transform: translateY(0);
+}
+
+.memory-caption {
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: var(--font-primary);
+}
+
+/* Keyframe Animations */
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes scrollRight {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Placeholder styling */
+.memory-card img[src*="placeholder"] {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+}
+
+/* ===================================
+   9. FOOTER
+   =================================== */
+
+/* Special Thanks Section */
+.special-thanks-section {
+    background: #000000;
+    position: relative;
+    z-index: 10;
+    border-top: 1px solid rgba(230, 43, 30, 0.3);
+}
+
+.special-thanks-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--light-text);
+    font-weight: 400;
+}
+
+/* Main Footer */
+.footer-section {
+    background: #1C1C1C;
+    position: relative;
+    z-index: 10;
+}
+
+.footer-logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.footer-mgmu-logo {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.mgm-logo-footer {
+    max-width: 150px;
+    width: 100%;
+    height: auto;
+    opacity: 0.95;
+    transition: opacity 0.3s ease;
+    display: block;
+}
+
+.mgm-logo-footer:hover {
+    opacity: 1;
+}
+
+.footer-mgmu-logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    gap: 1rem;
+}
+
+.footer-mgmu-logo {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.mgmu-logo-text {
+    color: var(--light-text);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    margin: 0;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.mgmu-website-link {
+    color: var(--accent-red);
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.mgmu-website-link:hover {
+    color: var(--light-text);
+    text-decoration: underline;
+}
+
+.footer-mgmu-address {
+    color: var(--light-text);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    margin: 0;
+    opacity: 0.75;
+    line-height: 1.4;
+}
+
+.footer-address-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.footer-address-text {
+    color: var(--light-text);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    margin: 0;
+    opacity: 0.85;
+    line-height: 1.6;
+    text-align: right;
+}
+
+.footer-description {
+    font-family: 'Cormorant Garamond', serif;
+    
+    color: var(--light-text);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.footer-heading {
+    font-size: 1.3rem;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(0.5rem, 2vw, 2.5rem);
+    
+}
+
+/* Footer Links */
+.footer-links li {
+    font-family: 'Cormorant Garamond', serif;
+    /* font-size: 1.9rem; */
+    margin-bottom: 0.9rem;
+}
+
+.footer-links a {
+    
+    color: var(--light-text);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: var(--ted-red);
+    transform: translateX(5px);
+}
+
+/* Contact Info */
+.footer-contact li {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--light-text);
+    /* font-size: 0.95rem; */
+    display: flex;
+    align-items: flex-start;
+}
+
+.footer-contact i {
+    color: var(--ted-red);
+    margin-top: 2px;
+}
+
+.footer-contact a {
+    color: var(--light-text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-contact a:hover {
+    color: var(--ted-red);
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: var(--light-text);
+    font-size: 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+}
+
+/* MGM Logo Styling */
+.mgm-logo-img {
+    width: 140px !important;
+    height: auto !important;
+    max-width: 140px;
+    opacity: 1;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+    filter: drop-shadow(0 2px 8px rgba(255, 107, 53, 0.2));
+    display: block;
+}
+
+.mgm-logo-img:hover {
+    filter: drop-shadow(0 4px 12px rgba(255, 107, 53, 0.4));
+}
+
+.footer-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: nowrap;
+    min-height: 60px;
+}
+
+.footer-mgm-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.footer-mgm-logo-desktop {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.footer-mgm-logo-mobile {
+    position: absolute;
+    right: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 10px;
+}
+
+/* Address styling below logo on desktop */
+.footer-mgm-logo-desktop + .footer-contact {
+    text-align: right;
+}
+
+/* Mobile adjustments */
+@media (max-width: 992px) {
+    .footer-logo-container {
+        justify-content: flex-start;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .mgm-logo-img {
+        max-width: 110px;
+    }
+}
+
+
+/* ===================================
+   9. ANIMATIONS
+   =================================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+/* ===================================
+   10. RESPONSIVE - MOBILE
+   =================================== */
+@media (max-width: 960px) {
+    /* Memories Section - Mobile */
+    .memory-card {
+        width: 280px;
+        height: 200px;
+    }
+}
+
+/* Footer mobile layout: place Quick Links and Connect side-by-side, enlarge About & Instagram links */
+@media (max-width: 768px) {
+    /* Make the about column full width (stacked above) */
+    .footer-section .container > .row:first-child > .col-lg-5 {
+        width: 100%;
+        display: block;
+    }
+
+    /* Make the Quick Links and Connect columns sit side-by-side at 50% each */
+    .footer-section .container > .row:first-child > .col-lg-2 {
+        width: 50%;
+        display: block;
+        float: left;
+        padding-left: 0.75rem; /* preserve some spacing */
+    }
+
+    /* Slightly increase their heading size for better balance */
+    .footer-section .container > .row:first-child > .col-lg-2 .footer-heading {
+        font-size: 1.45rem;
+        margin-bottom: 0.75rem;
+    }
+
+    /* Increase font-size of the 'About' link (first item in Quick Links column) */
+    .footer-section .container > .row:first-child > .col-lg-2:nth-of-type(2) .footer-links li:first-child a {
+        font-size: 1.05rem;
+    }
+
+    /* Increase font-size of the 'Instagram' link (first item in Connect column) */
+    .footer-section .container > .row:first-child > .col-lg-2:nth-of-type(3) .footer-links li:first-child a {
+        font-size: 1.05rem;
+    }
+
+    /* Clearfix for row after floating children */
+    .footer-section .container > .row:first-child::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    
+    .memories-row-ltr .memories-track {
+        animation: scrollLeft 30s linear infinite;
+    }
+    
+    .memories-row-rtl .memories-track {
+        animation: scrollRight 30s linear infinite;
+    }
+
+    .header-pill {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        padding: 0 15px;
+        height: 60px;
+    }
+
+    .header-wrapper {
+        top: 10px;
+        padding: 0;
+    }
+
+    .logo {
+        font-size: 1.4rem;
+        font-weight: 900;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: var(--dark-bg);
+        flex-direction: column;
+        justify-content: center;
+        gap: 35px;
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0.95);
+        transition: all 0.4s ease;
+        z-index: 1001;
+    }
+
+    .nav-menu.active {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: auto;
+    }
+
+    .nav-item {
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+
+    .mobile-buy-tickets {
+        display: block !important;
+        margin-top: 20px;
+        font-size: 1.1rem !important;
+        padding: 14px 40px !important;
+    }
+
+    .header-actions .btn-buy-tickets:not(.mobile-buy-tickets) {
+        display: none;
+    }
+
+    .mobile-toggle {
+        display: flex;
+        z-index: 1003;
+    }
+
+    .mobile-toggle.active span {
+        background-color: var(--ted-red);
+        box-shadow: 0 0 12px var(--ted-red);
+    }
+
+    .mobile-toggle.active span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+        width: 32px;
+    }
+
+    .mobile-toggle.active span:nth-child(2) {
+        opacity: 0;
+        transform: translateX(30px);
+        width: 10px;
+    }
+
+    .mobile-toggle.active span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+        width: 32px;
+    }
+
+    .hero-title {
+        font-size: clamp(6rem, 14vw, 8rem);
+        letter-spacing: 0.05em;
+        line-height: 1.8;
+    }
+
+    .hero-tagline {
+        font-size: clamp(1rem, 4vw, 1.5rem);
+        margin-top: 2rem;
+        display: block;
+    }
+    
+    .theme-header {
+        font-size: 2.5rem;
+    }
+    
+    .theme-title {
+        font-size: 1.8rem;
+    }
+    
+    .theme-content-box {
+        padding-left: 1rem;
+        border-left-width: 3px;
+    }
+    
+    .theme-description {
+        font-size: 0.95rem;
+        text-align: left;
+    }
+    
+    .about-section-title {
+        font-size: 2.5rem;
+    }
+    
+    .about-tabs-wrapper {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        max-width: 100%;
+    }
+    
+    .about-tab {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+    }
+    
+    .tab-content-box {
+        padding: 2rem 1.5rem;
+    }
+    
+    .about-content-text {
+        font-size: 1rem;
+        text-align: left;
+    }
+
+    section {
+        padding: 3rem 0;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+    }
+
+    /* Increase footer headings on mobile for better readability */
+    .footer-heading {
+        font-size: 1.3rem; /* larger on mobile */
+        line-height: 1.05;
+    }
+
+    .section-text {
+        font-size: 1rem;
+    }
+
+    .coming-soon h3 {
+        font-size: 1.3rem;
+    }
+
+    .coming-soon p {
+        font-size: 0.95rem;
+    }
+
+    /* Show and position the small X logo above the EMBER image on mobile
+       It is absolutely positioned inside .hero-content so it can overlap. */
+    .mobile-hero-logo {
+        display: block;
+        position: absolute;
+        top: 40%;
+        left: 52%;
+        transform: translate(-50%, -50%);
+        width: 190vw;
+        max-width: 1200px;
+        height: auto;
+        z-index: 12;
+        pointer-events: none;
+        opacity: 0.95;
+    }
+}
+
+/*--------------------------------------------------------------
+# Partner Section
+--------------------------------------------------------------*/
+.partner-card .speaker-photo {
+  height: 250px; /* Smaller card height */
+}
+
+.partner-card .food-partner-img {
+  object-fit: contain; /* Ensure the image fits without being cropped */
+  width: 150%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.partner-card .clothing-partner-img {
+  object-fit: contain; /* Make the clothing partner image fit the square */
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}

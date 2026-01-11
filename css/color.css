@@ -1,0 +1,40 @@
+/*
+ * TEDxMGMU 2026 - Color Scheme
+ * Brand colors and color utilities
+ */
+
+/* ===== BRAND COLORS ===== */
+.color-red { color: #FF3D00 !important; }
+.color-dark-red { color: #FF5520 !important; }
+.color-ember { color: #FF6300 !important; }
+.color-white { color: #ffffff !important; }
+.color-light { color: #e0e0e0 !important; }
+
+
+.bg-red { background-color: #FF3D00 !important; }
+.bg-dark { background-color: #050505 !important; }
+.bg-dark-secondary { background-color: #1a0a0a !important; }
+.bg-black { background-color: #000000 !important; }
+.bg-footer { background-color: #1C1C1C !important; }
+
+/* ===== GRADIENTS ===== */
+.gradient-ember {
+    background: linear-gradient(135deg, #FF3D00 0%, #FF6300 100%);
+}
+
+.gradient-dark {
+    background: linear-gradient(135deg, #050505 0%, #1a0a0a 100%);
+}
+
+/* ===== TEXT SHADOWS ===== */
+.text-glow-red {
+    text-shadow: 0 0 20px rgba(230, 43, 30, 0.5);
+}
+
+.text-glow-ember {
+    text-shadow: 0 0 20px rgba(232, 111, 95, 0.3);
+}
+
+/* ===== BORDERS ===== */
+.border-red { border-color: #FF3D00 !important; }
+.border-ember { border-color: #FF6300 !important; }
